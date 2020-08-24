@@ -17,7 +17,6 @@ const db = knex({
   },
 });
 
-const PORT = process.env.port;
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
@@ -25,7 +24,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send(database.users);
+  res.json("it is working");
 });
 
 app.post("/signin", (req, res) => {
@@ -48,6 +47,6 @@ app.post("/imageurl", (req, res) => {
   image.handleApiCall(req, res);
 });
 
-app.listen(PORT, () => {
-  console.log(`app is running on port ${PORT}`);
+app.listen(process.env.port || 3000, () => {
+  console.log(`app is running on port ${process.env.port}`);
 });
